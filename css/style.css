@@ -8,11 +8,8 @@
   padding: 5px 0;
   width: 1.6em;
   text-align: center;
-
-}
-.letter-button {
   border: 1px solid #a3a3a3;
-  /*color: #fff;*/
+
 }
 
 .letter-disabled {
@@ -25,5 +22,5 @@
   padding: 5px 0;
   width: 1.6em;
   text-align: center;
-  opacity: 0.2;
+  opacity: 0.3;
 }
