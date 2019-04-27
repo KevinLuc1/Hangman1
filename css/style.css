@@ -1,0 +1,29 @@
+.letter-button {
+  border-radius: 50%;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 1.6em;
+  height: auto;
+  margin: 0.2em 0.1em;
+  padding: 5px 0;
+  width: 1.6em;
+  text-align: center;
+
+}
+.letter-button {
+  border: 1px solid #a3a3a3;
+  /*color: #fff;*/
+}
+
+.letter-disabled {
+  border-radius: 50%;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 1.6em;
+  height: auto;
+  margin: 0.2em 0.1em;
+  padding: 5px 0;
+  width: 1.6em;
+  text-align: center;
+  opacity: 0.2;
+}
