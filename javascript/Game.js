@@ -75,13 +75,30 @@ let words = [
     let randomWord = words[Math.floor(Math.random() * words.length)];
     let play = new Hangman(randomWord);
     play.newGame();
-    // var wordToGuess = document.querySelector('.wordbox');
-    // wordToGuess.innerHTML = "hello";
-    // console.log("played new game")
+ 
     letterbox = [];
-    // document.querySelector('.guessedWrong').innerHTML = letterbox;
+    
     displayWrongLetterBox();
-  })
+
+    //changes any class letter-disabled back to letter-button
+    var something = document.querySelector('#alphabet-keypad').children;
+    // var somethingelse = something.querySelector('button');
+    console.log(something);
+    
+    // turns off opacity to all current buttons
+    for (var i = 0; i < something.length; i++) {
+      // var somethingelse = something.querySelector('button');
+      if (something[i].classList.contains('letter-disabled')) {
+           something[i].classList.remove('letter-disabled');
+           something[i].classList.add('letter-button');
+          };
+    }
+
+    // for (var i = 0; i < something; i++) {
+    //   console.log(something[i])
+    // }
+
+    })
 });
 
 function displayWrongLetterBox(){
