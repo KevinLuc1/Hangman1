@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           indexOfLetter.push(i)
         }
       })
-      console.log(indexOfLetter)
+      // console.log(indexOfLetter)
 
       //checking for duplicates in correct letter box
       if (correctLetterBox.includes(letter)){
@@ -135,11 +135,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
         insertNextPhoto();
 
 
-        // if guess counter = 0, lose and restart game
+        // if guess counter = 0, lose 
         if (guessCounter === 0){
           lossCounter += 1;
           displayLossCounter();
           alert("Out of guesses, Game Over")
+          
+          startNew();
           
         }
       }
@@ -161,7 +163,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
           winCounter +=1;
           displayWinCounter();
           alert("You have won!");
-          // startNew();
+
+          startNew();
         }
 
 
@@ -243,6 +246,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       incorrectLetterBox = [];
       correctLetterBox = [];
       guessCounter = 8;
+      guessedCorrect = 0;
 
       //redisplaying the empty letter boxes
       displayWrongLetterBox();
