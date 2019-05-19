@@ -2,18 +2,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
   let incorrectLetterBox = [];
   let correctLetterBox = [];
-
-  //dont rly need this
-  let wordToGuess = [];
-
   let letters_in_array = [];
-
-
   let dashLines = [];
-
   let winCounter = 0;
   let lossCounter = 0;
-
   let guessCounter = 6;
 
   // this equals the length of word
@@ -37,18 +29,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       numberToWin = this.wordLength;
 
-      //dont rly need this
-      wordToGuess = this.word;
+    
+
       letters_in_array = this.letters;
 
-    
-      console.log(letters_in_array)
-
-      console.log(numberToWin)
-
-     
-
-      displayWord();
       
       // empties out the global variable dashLines
       dashLines = [];
@@ -61,9 +45,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         dashLines = temp.split(" ")
         
       }
-      console.log(temp)
 
-      console.log(dashLines);
 
       displayDashes();
     }
@@ -112,10 +94,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   [].forEach.call(document.querySelectorAll('.letter-button'), function(el) {
     el.addEventListener('click', function() {
 
+
       if (this.classList.contains('letter-button')) {
            this.classList.remove('letter-button');
-           this.classList.add('letter-disabled');  
+           this.classList.add('letter-disabled'); 
+           this.setAttribute("disabled", "disabled")
         }
+
 
       let letter = this.innerHTML;
 
@@ -165,9 +150,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         dashLines[indexOfLetter[i]] = letter
         displayDashes();
 
+
         //increment guessedCorrect, will keep adding due to loop
         guessedCorrect += 1;
 
+
+      }
         //we win here and restart game
         if (guessedCorrect === numberToWin) {
           winCounter +=1;
@@ -175,8 +163,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
           alert("You have won!");
           startNew();
         }
-
-      }
 
 
     });
@@ -198,12 +184,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function displayDashes() {
     document.querySelector('.dashes').innerHTML = dashLines;
   }
-
-
-  // dont rly need this
-  function displayWord() {
-    document.querySelector('.wordbox').innerHTML = wordToGuess.toUpperCase();
-  }
+  
 
   function displayWinCounter(){
     document.querySelector('.winCounter').innerHTML = winCounter;
@@ -247,7 +228,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (something[i].classList.contains('letter-disabled')) {
              something[i].classList.remove('letter-disabled');
              something[i].classList.add('letter-button');
+             something[i].removeAttribute("disabled");
             };
+
         // console.log(something[i].innerHTML)
       }
   }
