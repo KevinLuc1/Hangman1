@@ -6,15 +6,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //dont rly need this
   let wordToGuess = [];
 
-  var letters_in_array = [];
-
-  // var wordToGuess = [];
-
-  var dashLines = [];
+  let letters_in_array = [];
 
 
+  let dashLines = [];
 
-  // let isInLettersArray = true;
+  let winCounter = 0;
+  let lossCounter = 0;
+
+  let guessCounter = 6;
+
+  // this equals the length of word
+  let numberToWin;
+  // every time a correct is guessed, this goes up
+  // game is won when guessedCorrect = numberToWin
+  let guessedCorrect = 0;
+
 
   class Hangman {
     constructor(word) {
@@ -28,18 +35,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // console.log(this.letters);
       console.log(this.wordLength);
 
+      numberToWin = this.wordLength;
+
       //dont rly need this
       wordToGuess = this.word;
       letters_in_array = this.letters;
+
     
       console.log(letters_in_array)
+
+      console.log(numberToWin)
 
      
 
       displayWord();
       
       // empties out the global variable dashLines
-      dashLines = ['apple'];
+      dashLines = [];
       var temp = []
       // put a dash into the html for every letter in new word
       for (var i = 0; i < this.letters.length; i++){
@@ -87,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     el.addEventListener('click', function() {
 
       startNew();
-      
+
 
     })
   });
@@ -131,10 +143,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
       else if (incorrectLetterBox.includes(letter)) {
         console.log("already in the incorrect letter box")
       }
-      // if no dup in incorrect, add letter and display
+      // if no dup in incorrectbox, add letter and display
+      // also drop guess count by 1
       else {
         incorrectLetterBox += letter;
         displayWrongLetterBox();
+        guessCounter -= 1;
+        displayGuessCounter();
+        // if guess counter = 0, lose and restart game
+        if (guessCounter === 0){
+          lossCounter += 1;
+          displayLossCounter();
+          alert("Out of guesses, Game Over")
+          startNew();
+        }
       }
 
 
@@ -142,6 +164,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
       for (var i = 0; i < indexOfLetter.length; i++){
         dashLines[indexOfLetter[i]] = letter
         displayDashes();
+
+        //increment guessedCorrect, will keep adding due to loop
+        guessedCorrect += 1;
+
+        //we win here and restart game
+        if (guessedCorrect === numberToWin) {
+          winCounter +=1;
+          displayWinCounter();
+          alert("You have won!");
+          startNew();
+        }
+
       }
 
 
@@ -149,6 +183,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   startNew();
+  displayWinCounter();
+  displayLossCounter();
+  displayGuessCounter();
 
   function displayWrongLetterBox(){
     document.querySelector('.guessedWrong').innerHTML = incorrectLetterBox;
@@ -168,6 +205,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.querySelector('.wordbox').innerHTML = wordToGuess.toUpperCase();
   }
 
+  function displayWinCounter(){
+    document.querySelector('.winCounter').innerHTML = winCounter;
+  }
+
+  function displayLossCounter(){
+    document.querySelector('.lossCounter').innerHTML = lossCounter;
+  }
+
+  function displayGuessCounter(){
+    document.querySelector('.guessCounter').innerHTML = guessCounter;
+  }
+
   // start or restart a new game
   function startNew(){
       // generate a new random word
@@ -182,10 +231,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // empties out the global variable correct and incorrect letter boxes
       incorrectLetterBox = [];
       correctLetterBox = [];
+      guessCounter = 6;
 
       //redisplaying the empty letter boxes
       displayWrongLetterBox();
       displayCorrectLetterBox();
+      displayGuessCounter();
 
      
       let something = document.querySelector('#alphabet-keypad').children;
