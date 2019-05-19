@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let dashLines = [];
   let winCounter = 0;
   let lossCounter = 0;
-  let guessCounter = 6;
+  let guessCounter = 8;
 
   // this equals the length of word
   let numberToWin;
@@ -23,9 +23,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     newGame(){
-      console.log(this.word);
-      // console.log(this.letters);
-      console.log(this.wordLength);
 
       numberToWin = this.wordLength;
 
@@ -132,15 +129,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // also drop guess count by 1
       else {
         incorrectLetterBox += letter;
-        displayWrongLetterBox();
         guessCounter -= 1;
+        displayWrongLetterBox();
         displayGuessCounter();
+        insertNextPhoto();
+
+
         // if guess counter = 0, lose and restart game
         if (guessCounter === 0){
           lossCounter += 1;
           displayLossCounter();
           alert("Out of guesses, Game Over")
-          startNew();
+          
         }
       }
 
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           winCounter +=1;
           displayWinCounter();
           alert("You have won!");
-          startNew();
+          // startNew();
         }
 
 
@@ -172,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   displayWinCounter();
   displayLossCounter();
   displayGuessCounter();
+  insertNextPhoto();
 
   function displayWrongLetterBox(){
     document.querySelector('.guessedWrong').innerHTML = incorrectLetterBox;
@@ -185,6 +186,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.querySelector('.dashes').innerHTML = dashLines;
   }
   
+  function insertNextPhoto(){
+    if (guessCounter === 8) {
+      document.querySelector('.hangmanImage').src="images/hangman0.png"
+    }
+    if (guessCounter === 7) {
+      document.querySelector('.hangmanImage').src="images/hangman1.png"
+    }
+    if (guessCounter === 6) {
+      document.querySelector('.hangmanImage').src="images/hangman2.png"
+    }
+    if (guessCounter === 5) {
+      document.querySelector('.hangmanImage').src="images/hangman3.png"
+    }
+    if (guessCounter === 4) {
+      document.querySelector('.hangmanImage').src="images/hangman4.png"
+    }
+    if (guessCounter === 3) {
+      document.querySelector('.hangmanImage').src="images/hangman5.png"
+    }
+    if (guessCounter === 2) {
+      document.querySelector('.hangmanImage').src="images/hangman6.png"
+    }
+    if (guessCounter === 1) {
+      document.querySelector('.hangmanImage').src="images/hangman7.png"
+    }
+    if (guessCounter === 0) {
+      document.querySelector('.hangmanImage').src="images/hangman8.png"
+    }
+  }
 
   function displayWinCounter(){
     document.querySelector('.winCounter').innerHTML = winCounter;
@@ -212,12 +242,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // empties out the global variable correct and incorrect letter boxes
       incorrectLetterBox = [];
       correctLetterBox = [];
-      guessCounter = 6;
+      guessCounter = 8;
 
       //redisplaying the empty letter boxes
       displayWrongLetterBox();
       displayCorrectLetterBox();
       displayGuessCounter();
+      insertNextPhoto();
 
      
       let something = document.querySelector('#alphabet-keypad').children;

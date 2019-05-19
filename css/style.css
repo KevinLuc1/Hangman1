@@ -24,3 +24,13 @@
   text-align: center;
   opacity: 0.3;
 }
+
+.photos > img {
+  height:250px;
+  width:150px;
+
+}
+
+.dashes {
+  font-size: 36px;
+}
