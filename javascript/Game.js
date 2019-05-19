@@ -1,151 +1,211 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     
-var letterbox = [];
+  let incorrectLetterBox = [];
+  let correctLetterBox = [];
 
-// var wordToGuess = [];
+  //dont rly need this
+  let wordToGuess = [];
 
-// var elem = document.querySelector('#some-elem');
+  var letters_in_array = [];
 
-class Hangman {
-  constructor(word) {
-    this.word = word;
-    this.letters = word.split(""); //returns an array of characters
-    this.wordLength = word.length;
-  }
+  // var wordToGuess = [];
 
-  newGame(){
-    console.log(this.word);
-    console.log(this.letters);
-    console.log(this.wordLength);
-    var wordToGuess = document.querySelector('.wordbox').innerHTML = this.word;
-  
-    }
-}
-
-class Guess extends Hangman {
-  constructor(word, guess) {
-    super(word);
-    this.guess = guess;
-    this.wrongLetter = [];
-    this.rightLetter = [];
-  }
-
-  displayGuess(){
-    console.log(this.word)
-  }
-}
+  var dashLines = [];
 
 
 
+  // let isInLettersArray = true;
 
-let words = [
-  "alligator", "aardvark", "anteater", "ape", "armadillo", 
-  "bat", "bee", "badger", "bear", "beaver", 
-  "beetle", "bird", "bumblebee", "buffalo", "butterfly",
-  "camel", "cat", "cheetah", "chicken", "chimpanzee",
-  "cockroach", "crocodile", "crow", "dolphin", "deer",
-  "duck", "donkey", "dove", "dinosaur", "dragon",
-  "eagle", "elephant", "elk", "emu", "falcon", 
-  "flamingo", "ferret", "fish", "gecko", "gerbil",
-  "giraffe", "gorilla", "goat", "grasshopper", "goose", 
-  "hamster", "horse", "hippopotamus", "hummingbird", "hyena",
-  "impala", "iguana", "jackal", "jaguar", "jellyfish",
-  "kangaroo", "koala", "leopard", "labrador", "lemur",
-  "llama", "lynx", "lobster", "ladybug", "magpie", 
-  "manatee", "meerkat", "millipede", "mongoose", "mouse", 
-  "monkey", "newt", "nightingale", "octupus", "otter",
-  "oyster", "ostrich", "parrot", "panther", "peacock",
-  "piranha", "platypus", "penguin", "porcupine", "puffin",
-  "quail", "raccoon", "rabbit", "rhinoceros", "rottweiler", 
-  "salamander", "scorpian", "seahorse", "spider", "squirrel",
-  "stringray", "tortoise", "toucan", "turkey", "termite", 
-  "vulture", "wallaby", "warthog", "whale", "wombat", 
-  "woodpecker", "zebra"
-];
-// let randomWord = words[Math.floor(Math.random() * words.length)];
-// let play = new Hangman(randomWord);
-
-// play.newGame();
-
-// var wordToGuess = [];
-
-//vanilla js for listening to a click to start a new game
-[].forEach.call(document.querySelectorAll('.resetButton'), function(el) {
-  el.addEventListener('click', function() {
-    let randomWord = words[Math.floor(Math.random() * words.length)];
-    let play = new Hangman(randomWord);
-    play.newGame();
- 
-    letterbox = [];
-    
-    displayWrongLetterBox();
-
-    //changes any class letter-disabled back to letter-button
-    var something = document.querySelector('#alphabet-keypad').children;
-    // var somethingelse = something.querySelector('button');
-    console.log(something);
-    
-    // turns off opacity to all current buttons
-    for (var i = 0; i < something.length; i++) {
-      // var somethingelse = something.querySelector('button');
-      if (something[i].classList.contains('letter-disabled')) {
-           something[i].classList.remove('letter-disabled');
-           something[i].classList.add('letter-button');
-          };
+  class Hangman {
+    constructor(word) {
+      this.word = word;
+      this.letters = word.split(""); //returns an array of characters
+      this.wordLength = word.length;
     }
 
-    // for (var i = 0; i < something; i++) {
-    //   console.log(something[i])
-    // }
+    newGame(){
+      console.log(this.word);
+      // console.log(this.letters);
+      console.log(this.wordLength);
+
+      //dont rly need this
+      wordToGuess = this.word;
+      letters_in_array = this.letters;
+    
+      console.log(letters_in_array)
+
+     
+
+      displayWord();
+      
+      // empties out the global variable dashLines
+      dashLines = ['apple'];
+      var temp = []
+      // put a dash into the html for every letter in new word
+      for (var i = 0; i < this.letters.length; i++){
+        
+        
+        temp += "_ ";
+        dashLines = temp.split(" ")
+        
+      }
+      console.log(temp)
+
+      console.log(dashLines);
+
+      displayDashes();
+    }
+  }
+
+  const words = [
+    "alligator", "aardvark", "anteater", "ape", "armadillo", 
+    "bat", "bee", "badger", "bear", "beaver", 
+    "beetle", "bird", "bumblebee", "buffalo", "butterfly",
+    "camel", "cat", "cheetah", "chicken", "chimpanzee",
+    "cockroach", "crocodile", "crow", "dolphin", "deer",
+    "duck", "donkey", "dove", "dinosaur", "dragon",
+    "eagle", "elephant", "elk", "emu", "falcon", 
+    "flamingo", "ferret", "fish", "gecko", "gerbil",
+    "giraffe", "gorilla", "goat", "grasshopper", "goose", 
+    "hamster", "horse", "hippopotamus", "hummingbird", "hyena",
+    "impala", "iguana", "jackal", "jaguar", "jellyfish",
+    "kangaroo", "koala", "leopard", "labrador", "lemur",
+    "llama", "lynx", "lobster", "ladybug", "magpie", 
+    "manatee", "meerkat", "millipede", "mongoose", "mouse", 
+    "monkey", "newt", "nightingale", "octupus", "otter",
+    "oyster", "ostrich", "parrot", "panther", "peacock",
+    "piranha", "platypus", "penguin", "porcupine", "puffin",
+    "quail", "raccoon", "rabbit", "rhinoceros", "rottweiler", 
+    "salamander", "scorpian", "seahorse", "spider", "squirrel",
+    "stringray", "tortoise", "toucan", "turkey", "termite", 
+    "vulture", "wallaby", "warthog", "whale", "wombat", 
+    "woodpecker", "zebra"
+  ];
+
+  //vanilla js for listening to a click to start a new game
+  [].forEach.call(document.querySelectorAll('.resetButton'), function(el) {
+    el.addEventListener('click', function() {
+
+      startNew();
+      
 
     })
-});
-
-function displayWrongLetterBox(){
-  document.querySelector('.guessedWrong').innerHTML = letterbox;
-}
+  });
 
 
 
 
 
-// displaying letters guessed
-[].forEach.call(document.querySelectorAll('.letter-button'), function(el) {
-  el.addEventListener('click', function() {
+  // displaying letters guessed
+  [].forEach.call(document.querySelectorAll('.letter-button'), function(el) {
+    el.addEventListener('click', function() {
 
-
-    var letter = this.innerHTML;
-    console.log(letter)
-    console.log(this)
-
-    // for (var i = 0; i < letterbox.length; i++) {
-    //     console.log(letterbox[i]); // index
-    // };
-
-    if (letterbox.indexOf(letter) === -1) {
-      console.log("element doesn't exist");
-      letterbox += letter;
-
-      displayWrongLetterBox();
-
-      // change class to letter-disabled to add opacity
       if (this.classList.contains('letter-button')) {
-         this.classList.remove('letter-button');
-         this.classList.add('letter-disabled');
+           this.classList.remove('letter-button');
+           this.classList.add('letter-disabled');  
         }
 
+      let letter = this.innerHTML;
 
-    }
-    else {
-      console.log("element already exists");
-    }
+      let indexOfLetter = []
+
+      // find all index where this letter appears
+      letters_in_array.forEach((e, i)=>{
+        if(e === letter){
+          indexOfLetter.push(i)
+        }
+      })
+      console.log(indexOfLetter)
+
+      //checking for duplicates in correct letter box
+      if (correctLetterBox.includes(letter)){
+        console.log("already in the correct letter box")
+      }
+      //if not already selected in correct letter box, add letter to box
+      else if (letters_in_array.includes(letter)){
+        correctLetterBox += letter;
+        displayCorrectLetterBox();
+      }
+      // if not dup in correctbox or is not correct letter, 
+      // check if dup in incorrect box, is true do nothing
+      else if (incorrectLetterBox.includes(letter)) {
+        console.log("already in the incorrect letter box")
+      }
+      // if no dup in incorrect, add letter and display
+      else {
+        incorrectLetterBox += letter;
+        displayWrongLetterBox();
+      }
 
 
-  })
+      // swaps the dash at the correct index
+      for (var i = 0; i < indexOfLetter.length; i++){
+        dashLines[indexOfLetter[i]] = letter
+        displayDashes();
+      }
+
+
+    });
+  });
+
+  startNew();
+
+  function displayWrongLetterBox(){
+    document.querySelector('.guessedWrong').innerHTML = incorrectLetterBox;
+  }
+
+  function displayCorrectLetterBox(){
+    document.querySelector('.guessedRight').innerHTML = correctLetterBox;
+  }
+
+  function displayDashes() {
+    document.querySelector('.dashes').innerHTML = dashLines;
+  }
+
+
+  // dont rly need this
+  function displayWord() {
+    document.querySelector('.wordbox').innerHTML = wordToGuess.toUpperCase();
+  }
+
+  // start or restart a new game
+  function startNew(){
+      // generate a new random word
+      let randomWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
+
+      // calls the constructor Hangman and inputs newly generated word
+      let play = new Hangman(randomWord);
+
+      // calling the method newGame inside the constructor
+      play.newGame();
+
+      // empties out the global variable correct and incorrect letter boxes
+      incorrectLetterBox = [];
+      correctLetterBox = [];
+
+      //redisplaying the empty letter boxes
+      displayWrongLetterBox();
+      displayCorrectLetterBox();
+
+     
+      let something = document.querySelector('#alphabet-keypad').children;
+      
+      // turns off opacity to all current buttons
+      // by changing any class letter-disabled back to letter-button
+      for (var i = 0; i < something.length; i++) {
+        if (something[i].classList.contains('letter-disabled')) {
+             something[i].classList.remove('letter-disabled');
+             something[i].classList.add('letter-button');
+            };
+        // console.log(something[i].innerHTML)
+      }
+  }
+
 });
 
 
-});
+
+
 
 
 
