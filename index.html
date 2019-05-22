@@ -16,19 +16,24 @@
 
     <br><br>
 
-	<div class="lettersGuessed">
-		<p>Letter(s) wrong: <span class="guessedWrong"></span> </p>
-		<p>Letter(s) correct: <span class="guessedRight"></span></p>
-	</div>
+    <div class="row">
+        <div class="column">
+        	<div class="lettersGuessed">
+        		<p>Letter(s) correct: <span class="guessedRight"></span></p>
+                <p>Letter(s) incorrect: <span class="guessedWrong"></span> </p>
+        	</div>
 
-    <br>
-
-	<div class="winsLosses">
-		<p>Wins: <span class="winCounter"></span> <br> 
-		Losses: <span class="lossCounter"></span> <br>
-		Guesses Remaining: <span class="guessCounter"></span>
-		</p>
-	</div>
+            <br>
+        </div>
+        <div class="column">
+        	<div class="winsLosses">
+        		<p>Wins: <span class="winCounter"></span> <br> 
+        		Losses: <span class="lossCounter"></span> <br>
+        		Guesses Remaining: <span class="guessCounter"></span>
+        		</p>
+        	</div>
+        </div>
+    </div>
 
 	<div id="alphabet-keypad" >
         
@@ -67,7 +72,7 @@
 	</div>
       	
     <div id="wordToGuess">
-	    <p>Please select a letter</p>
+	    <p class="textBox">Please select a letter<br>Category:Animals</p>
 	    <span class="dashes"></span>
 
     </div>

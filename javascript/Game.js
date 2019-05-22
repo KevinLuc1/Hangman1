@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // because we need to replace the index of a dash later
       dashLines = temp.split(" ")
 
-      //joining it back so we can display this to html 
+      //joining it back so we can display a string and not an array into the html
       noDash = dashLines.join(" ")
 
-
+      //sends the currently blank string into the html
       displayNoDashes();
 
     }
@@ -170,9 +170,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (guessedCorrect === numberToWin) {
           winCounter +=1;
           displayWinCounter();
-          alert("You have won!");
+          document.querySelector('.textBox').innerHTML = "Good job!";
 
-          startNew();
+          disableAllButtons();
         }
 
 
@@ -221,17 +221,37 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.querySelector('.guessCounter').innerHTML = guessCounter;
   }
 
+  function disableAllButtons() {
+    for (var i = 0; i < 18; i++){
+            var hello = document.querySelector('.letter-button');
+               hello.classList.remove('letter-button');
+               hello.classList.add('letter-disabled'); 
+               hello.setAttribute("disabled", "disabled")
+          }
+  }
+
+  function enableAllButtons() {
+    for (var i = 0; i < 26; i++){
+        var hello = document.querySelector('.letter-disabled');
+           hello.classList.remove('letter-disabled');
+           hello.classList.add('letter-button'); 
+           hello.removeAttribute("disabled")
+      }
+  }
+
   function weLost() {
 
     if (guessCounter === 0){
           lossCounter += 1;
           displayLossCounter();
 
-          alert("Out of guesses, Game Over, the correct word was " + word)
           insertNextPhoto();
 
+          document.querySelector('.textBox').innerHTML = "Game Over! The correct word was "+ word;
 
-          startNew();
+
+
+          disableAllButtons();
           
         }
   }
@@ -259,6 +279,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       displayGuessCounter();
       insertNextPhoto();
 
+      //enable all buttons 
+      enableAllButtons();
+
      
       let something = document.querySelector('#alphabet-keypad').children;
       
@@ -273,6 +296,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         // console.log(something[i].innerHTML)
       }
+
+      document.querySelector('.textBox').innerHTML = "Please select a letter<br>Category: Animals";
   }
 
 });
