@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // game is won when guessedCorrect = numberToWin
   let guessedCorrect = 0;
 
+  let word;
+
 
   class Hangman {
     constructor(word) {
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     newGame(){
-
+      word = this.word;
       numberToWin = this.wordLength;
 
     
@@ -136,14 +138,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
         // if guess counter = 0, lose 
-        if (guessCounter === 0){
-          lossCounter += 1;
-          displayLossCounter();
-          alert("Out of guesses, Game Over")
+
+        weLost();
+
+        // if (guessCounter === 0){
+        //   lossCounter += 1;
+        //   displayLossCounter();
+
+        //   alert("Out of guesses, Game Over, the correct word was " + word)
           
-          startNew();
+        //   startNew();
           
-        }
+        // }
       }
 
 
@@ -190,33 +196,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   function insertNextPhoto(){
-    if (guessCounter === 8) {
-      document.querySelector('.hangmanImage').src="images/hangman0.png"
-    }
-    if (guessCounter === 7) {
-      document.querySelector('.hangmanImage').src="images/hangman1.png"
-    }
-    if (guessCounter === 6) {
-      document.querySelector('.hangmanImage').src="images/hangman2.png"
-    }
-    if (guessCounter === 5) {
-      document.querySelector('.hangmanImage').src="images/hangman3.png"
-    }
-    if (guessCounter === 4) {
-      document.querySelector('.hangmanImage').src="images/hangman4.png"
-    }
-    if (guessCounter === 3) {
-      document.querySelector('.hangmanImage').src="images/hangman5.png"
-    }
-    if (guessCounter === 2) {
-      document.querySelector('.hangmanImage').src="images/hangman6.png"
-    }
-    if (guessCounter === 1) {
-      document.querySelector('.hangmanImage').src="images/hangman7.png"
-    }
-    if (guessCounter === 0) {
-      document.querySelector('.hangmanImage').src="images/hangman8.png"
-    }
+
+    
+    // template literals
+    // display the image currently tied to guessCounter
+    document.querySelector('.hangmanImage').src=`images/hangman${guessCounter}.png`
+    
+
   }
 
   function displayWinCounter(){
@@ -229,6 +215,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function displayGuessCounter(){
     document.querySelector('.guessCounter').innerHTML = guessCounter;
+  }
+
+  function weLost() {
+
+    if (guessCounter === 0){
+          lossCounter += 1;
+          displayLossCounter();
+
+          alert("Out of guesses, Game Over, the correct word was " + word)
+          insertNextPhoto();
+
+
+          
+          startNew();
+          
+        }
   }
 
   // start or restart a new game
