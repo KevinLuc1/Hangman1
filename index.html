@@ -12,30 +12,29 @@
     <h1>Hangman Game</h1>
 		
 
-	<button class="resetButton" type="button">New Game!</button>
 
     <br><br>
 
     <div class="row">
         <div class="column">
-        	<div class="lettersGuessed">
-        		<p>Letter(s) correct: <span class="guessedRight"></span></p>
+            <div class="lettersGuessed">
+                <p>Letter(s) correct: <span class="guessedRight"></span></p>
                 <p>Letter(s) incorrect: <span class="guessedWrong"></span> </p>
-        	</div>
+            </div>
 
             <br>
         </div>
         <div class="column">
-        	<div class="winsLosses">
-        		<p>Wins: <span class="winCounter"></span> <br> 
-        		Losses: <span class="lossCounter"></span> <br>
-        		Guesses Remaining: <span class="guessCounter"></span>
-        		</p>
-        	</div>
+            <div class="winsLosses">
+                <p>Wins: <span class="winCounter">0</span> <br> 
+                Losses: <span class="lossCounter">0</span> <br>
+                Guesses Remaining: <span class="guessCounter"></span>
+                </p>
+            </div>
         </div>
     </div>
 
-	<div id="alphabet-keypad" >
+    <div id="alphabet-keypad" >
         
         <button class="letter-button" type="button">A</button>
         <button class="letter-button" type="button">B</button>
@@ -66,14 +65,13 @@
 
 
     </div>
-
-	<div style="font-size: 33px" class="wordbox">
-			
-	</div>
-      	
+    
+    <br>
+	<button class="resetButton" type="button">New Game!</button>
+    <br>
     <div id="wordToGuess">
-	    <p class="textBox">Please select a letter<br>Category:Animals</p>
-	    <span class="dashes"></span>
+        <p class="textBox">Please select a letter<br>Category: Animals</p>
+        <span class="dashes"></span>
 
     </div>
 
