@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let lossCounter = 0;
   let guessCounter = 8;
 
+  let noDash = ""
+
   // this equals the length of word
   let numberToWin;
   // every time a correct is guessed, this goes up
@@ -35,18 +37,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
       
       // empties out the global variable dashLines
       dashLines = [];
-      var temp = []
+      var temp = [];
       // put a dash into the html for every letter in new word
       for (var i = 0; i < this.letters.length; i++){
         
         
         temp += "_ ";
-        dashLines = temp.split(" ")
         
       }
 
+      // we need to split the dashes from string into an array
+      // because we need to replace the index of a dash later
+      dashLines = temp.split(" ")
 
-      displayDashes();
+      //joining it back so we can display this to html 
+      noDash = dashLines.join(" ")
+
+
+      displayNoDashes();
+
     }
   }
 
@@ -141,22 +150,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         weLost();
 
-        // if (guessCounter === 0){
-        //   lossCounter += 1;
-        //   displayLossCounter();
-
-        //   alert("Out of guesses, Game Over, the correct word was " + word)
-          
-        //   startNew();
-          
-        // }
       }
 
 
       // swaps the dash at the correct index
       for (var i = 0; i < indexOfLetter.length; i++){
         dashLines[indexOfLetter[i]] = letter
-        displayDashes();
+        // displayDashes();
+        noDash = dashLines.join(" ")
+        displayNoDashes();
 
 
         //increment guessedCorrect, will keep adding due to loop
@@ -191,10 +193,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.querySelector('.guessedRight').innerHTML = correctLetterBox;
   }
 
-  function displayDashes() {
-    document.querySelector('.dashes').innerHTML = dashLines;
+
+  function displayNoDashes() {
+    document.querySelector('.dashes').innerHTML = noDash;
   }
-  
+
+
   function insertNextPhoto(){
 
     
@@ -227,7 +231,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
           insertNextPhoto();
 
 
-          
           startNew();
           
         }

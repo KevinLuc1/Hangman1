@@ -6,17 +6,22 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="javascript/Game.js"></script>
 
-	<!-- <script type="text/javascript" src="javascript/wordbox.js"></script> -->
 </head>
 <body>
+
+    <h1>Hangman Game</h1>
 		
 
 	<button class="resetButton" type="button">New Game!</button>
 
+    <br><br>
+
 	<div class="lettersGuessed">
-		<p>Letter(s) already guessed wrong: <span class="guessedWrong"></span></p>
+		<p>Letter(s) wrong: <span class="guessedWrong"></span> </p>
 		<p>Letter(s) correct: <span class="guessedRight"></span></p>
 	</div>
+
+    <br>
 
 	<div class="winsLosses">
 		<p>Wins: <span class="winCounter"></span> <br> 
@@ -57,12 +62,12 @@
 
     </div>
 
-	<div class="wordbox">
+	<div style="font-size: 33px" class="wordbox">
 			
 	</div>
       	
     <div id="wordToGuess">
-	    <p>word to guess</p>
+	    <p>Please select a letter</p>
 	    <span class="dashes"></span>
 
     </div>

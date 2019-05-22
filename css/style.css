@@ -1,3 +1,15 @@
+body {
+  background: url("../images/light-blue-background.jpg");
+  background-repeat: repeat;
+  background-size: 100%;
+  text-align: center;
+  font-family: Verdana, Times New Roman;
+
+}
+#alphabet-keypad {
+
+}
+
 .letter-button {
   border-radius: 50%;
   display: inline-block;
@@ -34,3 +46,4 @@
 .dashes {
   font-size: 36px;
 }
+
