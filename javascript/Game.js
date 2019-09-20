@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     // template literals
     // display the image currently tied to guessCounter
-    document.querySelector('.hangmanImage').src=`images/hangman${guessCounter}.png`
+    document.querySelector('.hangmanImage').src=`./images/hangman${guessCounter}.png`
     
 
   }
